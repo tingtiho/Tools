@@ -1,0 +1,23 @@
+package cn.qqjz.hong;
+
+import java.io.File;
+
+public class FileExample {
+
+	public static void main(String args[]){
+		createFile();
+	}
+	
+	public static void createFile() {
+		File file = new File("D:/test/createfile.txt");
+		try {
+			file.createNewFile();
+			System.out.println("该分区大小："+file.getTotalSpace()/(1024*1024*1024)+"G");
+			file.mkdir();
+			System.out.println("文件名："+file.getName());
+			System.out.println("文件父目录字符串："+file.getParent());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
