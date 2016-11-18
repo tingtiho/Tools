@@ -1,0 +1,58 @@
+package cn.qqjz.hong;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class ObjectStream {
+
+	public static void main(String[] args) {
+		ObjectOutputStream objectWrite = null;
+		ObjectInputStream objectRead = null;
+		
+		try {
+			objectWrite = new ObjectOutputStream(new FileOutputStream("D:/test/student.txt"));
+			objectWrite.writeObject(new Student("gg",22));
+			objectWrite.writeObject(new Student("tt",18));
+			objectWrite.writeObject(new Student("rr",17));
+			objectRead = new ObjectInputStream(new FileInputStream("D:/test/student.txt"));
+			for(int i = 0; i < 3; i ++){
+				System.out.println(objectRead.readObject());
+			}
+			
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				objectRead.close();
+				objectWrite.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+	}
+}
+
+class Student implements Serializable{
+	private String name;
+	private int age;
+	
+	public Student(String name, int age){
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", age=" + age + "]";
+	}
+	
+	
+}
